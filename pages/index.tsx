@@ -1,6 +1,9 @@
+"use client"
+import { FC } from 'react';
 import Head from 'next/head';
+import Main from '@/Components/Main';
 
-const Home = () => {
+const Home: FC = () => {
     return (
         <>
             <Head>
@@ -11,7 +14,7 @@ const Home = () => {
             </Head>
 
             <main>
-                <h1>HI</h1>
+                <Main />
             </main>
         </>
     )
