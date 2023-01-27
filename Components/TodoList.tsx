@@ -6,20 +6,19 @@ import {
     IconButton,
     Menu,
     MenuButton,
-    MenuItem,
-    MenuList,
     Text
 } from '@chakra-ui/react';
 import { Todos } from './Types';
-import { ChevronDownIcon } from '@chakra-ui/icons';
+import { DeleteIcon } from '@chakra-ui/icons';
 
-const TodoList: FC<Todos> = ({ title, complete }) => {
+const TodoList: FC<Todos> = ({ id, title, complete, onToggle, onDelete }) => {
     return (
         <>
             <Flex>
                 <Checkbox
                     w="full"
                     isChecked={complete}
+                    onChange={() => onToggle(id)}
                 >
                     <Text
                         as={complete ? "s" : "p"}
@@ -33,28 +32,10 @@ const TodoList: FC<Todos> = ({ title, complete }) => {
                         as={IconButton}
                         aria-label='Options'
                         colorScheme="blackalpha.600"
-                        icon={<ChevronDownIcon />}
+                        icon={<DeleteIcon />}
                         variant='ghost'
+                        onClick={() => onDelete(id)}
                     />
-                    <MenuList
-                        bg="blackalpha.600"
-                        color="white"
-                    >
-                        <MenuItem
-                            bg="blackalpha.600"
-                            color="white"
-                            _hover={{ bg: "gray.900" }}
-                        >
-                            Edit
-                        </MenuItem>
-                        <MenuItem
-                            bg="blackalpha.600"
-                            color="white"
-                            _hover={{ bg: "gray.900" }}
-                        >
-                            Delete
-                        </MenuItem>
-                    </MenuList>
                 </Menu>
             </Flex>
         </>

@@ -7,19 +7,21 @@ import {
     Input
 } from '@chakra-ui/react';
 import TodoList from './TodoList';
-import { Todos } from './Types';
+import { Todo } from './Types';
 
 const Main: FC = () => {
 
     const [input, setInput] = useState<string>("");
 
-    const [todos, setTodos] = useState<Todos[]>([
+    const [todos, setTodos] = useState<Todo[]>([
         {
-            title: "Data",
-            complete: false
+            id: 0,
+            title: "Learning Jamstack",
+            complete: true
         },
         {
-            title: "TypeData",
+            id: 1,
+            title: "Learning Serverless API's",
             complete: false
         },
     ]);
@@ -32,12 +34,37 @@ const Main: FC = () => {
         e.preventDefault();
 
         const newTodos = [...todos, {
+            id: Math.random(),
             title: input,
             complete: false
         }];
 
         setTodos(newTodos);
         setInput("");
+    };
+
+    const onToggle = (id: number): void => {
+
+        const updateTodos = todos.map(todo => {
+
+            if (todo.id === id) {
+                return {
+                    ...todo,
+                    complete: !todo.complete
+                }
+            };
+
+            return todo;
+        });
+
+        setTodos(updateTodos);
+    };
+
+    const onDelete = (id: number): void => {
+
+        const deleteTodos = todos.filter((todo) => todo.id !== id);
+        setTodos(deleteTodos);
+
     };
 
     return (
@@ -85,11 +112,14 @@ const Main: FC = () => {
                     flexDirection="column"
                     mt='5'
                 >
-                    {todos.map((todo, index) => (
+                    {todos.map((todo) => (
                         <TodoList
-                            key={index}
+                            key={todo.id}
+                            id={todo.id}
                             title={todo.title}
                             complete={todo.complete}
+                            onToggle={onToggle}
+                            onDelete={onDelete}
                         />
                     ))}
                 </Flex>
