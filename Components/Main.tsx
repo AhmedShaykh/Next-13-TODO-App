@@ -1,6 +1,8 @@
-"use client"
+"use client";
 import { ChangeEvent, FC, useState } from 'react';
 import {
+    Badge,
+    Box,
     Button,
     Flex,
     Heading,
@@ -33,6 +35,8 @@ const Main: FC = () => {
     const handleSubmit = (e: ChangeEvent<HTMLInputElement>) => {
         e.preventDefault();
 
+        if (!input.length) return;
+
         const newTodos = [...todos, {
             id: Math.random(),
             title: input,
@@ -42,6 +46,12 @@ const Main: FC = () => {
         setTodos(newTodos);
         setInput("");
     };
+
+    const EmptyTodo = () => (
+        <Badge colorScheme='red' p='4' m='4' borderRadius='lg'>
+            No Todos !!
+        </Badge>
+    );
 
     const onToggle = (id: number): void => {
 
@@ -72,23 +82,23 @@ const Main: FC = () => {
             <Flex
                 as="form"
                 w="full"
-                h="100vh"
                 maxW="xl"
                 mx="auto"
+                px={["2", "4", "4"]}
                 alignItems="center"
                 flexDirection="column"
                 onSubmit={handleSubmit}
             >
                 <Heading
-                    mt="10"
+                    mt="8"
                     mb="8"
                     as='h1'
-                    fontSize='5xl'
+                    fontSize={['5xl', '5xl', '5xl']}
                     fontWeight='extrabold'
                     bgGradient='linear(to-l, #0033ff, #0afffb)'
                     bgClip='text'
                 >
-                    Todo Application
+                    TODO APP
                 </Heading>
                 <Input
                     color="white"
@@ -110,7 +120,7 @@ const Main: FC = () => {
                     color="white"
                     w="full"
                     flexDirection="column"
-                    mt='5'
+                    mt='4'
                 >
                     {todos.map((todo) => (
                         <TodoList
@@ -122,6 +132,9 @@ const Main: FC = () => {
                             onDelete={onDelete}
                         />
                     ))}
+                    <Box textAlign={"center"}>
+                        {todos.length === 0 && <EmptyTodo />}
+                    </Box>
                 </Flex>
             </Flex>
         </>

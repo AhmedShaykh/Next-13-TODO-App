@@ -1,4 +1,4 @@
-"use client"
+"use client";
 import { FC } from 'react';
 import {
     Checkbox,
@@ -14,7 +14,7 @@ import { DeleteIcon } from '@chakra-ui/icons';
 const TodoList: FC<Todos> = ({ id, title, complete, onToggle, onDelete }) => {
     return (
         <>
-            <Flex>
+            <Flex py={'2'}>
                 <Checkbox
                     w="full"
                     isChecked={complete}
