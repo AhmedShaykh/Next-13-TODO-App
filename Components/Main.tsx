@@ -49,7 +49,7 @@ const Main: FC = () => {
 
     const EmptyTodo = () => (
         <Badge colorScheme='red' p='4' m='4' borderRadius='lg'>
-            No Todos !!
+            No Todos Yay !!!
         </Badge>
     );
 
@@ -93,12 +93,12 @@ const Main: FC = () => {
                     mt="8"
                     mb="8"
                     as='h1'
-                    fontSize={['5xl', '5xl', '5xl']}
+                    fontSize={['4xl', '5xl', '5xl']}
                     fontWeight='extrabold'
                     bgGradient='linear(to-l, #0033ff, #0afffb)'
                     bgClip='text'
                 >
-                    TODO APP
+                    Todo Application
                 </Heading>
                 <Input
                     color="white"
